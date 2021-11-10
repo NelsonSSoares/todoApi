@@ -1,8 +1,22 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const {PORT, APP_NAME} = require('./util/appConfig.js');
+//const port = 3000;
 
-app.get("/usuario", (req,resp)=> {
+const usersHandler = require('./controllers/usersControllers/usersControllers.js');
+const taskHandler = require('./controllers/taskControllers/taskControllers.js');
+
+app.listen(PORT, ()=> {
+    console.log(`Online na porta = http://localhost:${PORT}`);
+});
+
+
+
+//const config = require('./util/appConfig.js');
+
+
+/*
+app.get("/users", (req,resp)=> {
     const usuario = {
         id: 1,
         nome: 'Nelson',
@@ -13,7 +27,7 @@ app.get("/usuario", (req,resp)=> {
     resp.send(usuario)
     //resp.send(JSON.parse(usuario));
 });
-app.get("/tarefa", (req,resp)=> {
+app.get("/tasks", (req,resp)=> {
 
     const tarefa = {
         id: 1,
@@ -29,6 +43,4 @@ app.get("/tarefa", (req,resp)=> {
 
     resp.send(tarefa);
 });
-app.listen(port, ()=> {
-    console.log(`Example app listening at http://localhost:${port}`);
-})
+*/
