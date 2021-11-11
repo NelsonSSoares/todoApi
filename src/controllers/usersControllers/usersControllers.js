@@ -1,12 +1,25 @@
 class usersControllers{
     show = (req, res)=> {
         res.send(
-            "Rota de usuarios Ativada com GET"
+            {
+                id: 1,
+                nome: 'Nelson',
+                email: 'punkpunkada@gmail.com',
+                datanasc: '1993-09-05',
+                senha: 'Unkown'
+            }
         );
+        
     };
+    save = (req, res) => {
+        res.send("Rota POST de tarefa ativada: tarefa adicionada ao banco de dados")
+    }
 };
 
 module.exports = usersControllers;
+
+
+
 /*
 function usersHandler(req, res){
     res.send("Rota ativada com metodo GET!!");
