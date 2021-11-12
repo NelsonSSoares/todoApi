@@ -12,12 +12,12 @@ class usersControllers{
         
     };
     save = (req, res) => {
-        req.body;
-        res.send("Rota POST de tarefa ativada: tarefa adicionada ao banco de dados")
+        console.log(req.body)
+        res.send(`Rota POST de tarefa ativada: Usuario: ${req.body.nome}, Idade: ${req.body.idade}`)
     }
 };
 
-module.exports = usersControllers;
+module.exports =  new usersControllers();
 
 
 

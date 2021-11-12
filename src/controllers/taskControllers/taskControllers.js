@@ -17,7 +17,7 @@ class taskControllers{
     }
 };
 
-module.exports = taskControllers;
+module.exports = new taskControllers();
 
 /*
 function taskHandler(req, res){
