@@ -5,10 +5,17 @@ const {PORT, APP_NAME} = require('./util/appConfig.js');
 
 const usersHandler = require('./controllers/usersControllers/usersControllers.js');
 const taskHandler = require('./controllers/taskControllers/taskControllers.js');
+const { application } = require('express');
 
 const users = new usersHandler()
 const tasks = new taskHandler()
 
+app.use((req, res, next) =>{
+    console.log(req.headers.host, new Date().toLocaleDateString())
+    next();
+})
+
+app.use(express.json())
 
 // USUARIOS - USERS
 app.get('/users', users.show);

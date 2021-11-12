@@ -12,6 +12,7 @@ class usersControllers{
         
     };
     save = (req, res) => {
+        req.body;
         res.send("Rota POST de tarefa ativada: tarefa adicionada ao banco de dados")
     }
 };
