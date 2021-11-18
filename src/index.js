@@ -1,32 +1,30 @@
-const express = require('express');
+const express = require("express");
+
+const UserController = require("./controllers/userController");
+const TaskController = require("./controllers/taskController");
+
 const app = express();
-const {PORT, APP_NAME} = require('./util/appConfig.js');
-//const port = 3000;
-
-const usersHandler = require('./controllers/usersControllers/usersControllers.js');
-const taskHandler = require('./controllers/taskControllers/taskControllers.js');
-const { application } = require('express');
-const usersControllers = require('./controllers/usersControllers/usersControllers.js');
-const taskControllers = require('./controllers/taskControllers/taskControllers.js');
-
-//const users = new usersHandler()
-//const tasks = new taskHandler()
+const { APP_PORT, APP_NAME } = require("./util/appConfig");
 
 app.use((req, res, next) => {
-    console.log(req.headers.host, new Date().toLocaleDateString())
-    next();
-})
-app.use(express.json())
-// USUARIOS - USERS
-app.get('/users', usersControllers.show);
-app.post('/users', usersControllers.show);
-// TAREFAS - TASKS
-app.get("/tasks", taskControllers.show);
-app.post("/tasks", taskControllers.save);
-
-app.listen(PORT, ()=> {
-    console.log(`Online na porta = http://localhost:${PORT}`);
+  console.log(req.headers.host, new Date().toLocaleTimeString());
+  next();
 });
 
+app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("ToDo APP API");
+});
 
+app.get("/users/:title", UserController.show);
+app.get("/users/", UserController.index);
+app.post("/users", UserController.save);
+
+app.get("/tasks/:title", TaskController.show);
+app.get("/tasks/", TaskController.index);
+app.post("/tasks", TaskController.save);
+
+app.listen(APP_PORT, () => {
+  console.log(`Server ${APP_NAME} running at http://localhost:${APP_PORT}`);
+});
