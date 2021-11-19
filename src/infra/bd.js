@@ -1,4 +1,4 @@
 module.exports = {
-    usersDB: [],
-    tasksDB: []
-}
+  usersDB: [],
+  tasksDB: [],
+};
