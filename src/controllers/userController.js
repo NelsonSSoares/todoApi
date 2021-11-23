@@ -1,70 +1,76 @@
 const UserModel = require("../models/userModel");
-//const {tasksDB} = require("../infra/bd")
-const db = require("../infra/sqlite-db");
-/* 
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./src/infra/database.db');
+const dao = require("../dao/userDAO");
 
-*/
 class UserController {
   constructor(dbConn) {
     this.dbConn = dbConn;
   }
 
   show = (req, res) => {
-    const name = req.params.name;
+    const id = req.params.id;
 
-    this.dbConn.forEach((user) => {
-      if (user.name === name) {
+    this.dbConn
+      .getUserByID(id)
+      .then((user) => {
         res.send(user);
-      }
-    });
+      })
+      .catch((error) => {
+        res.send(error);
+      });
   };
 
   index = (req, res) => {
-    this.dbConn.all("SELECT * FROM USUARIOS", (error,results) => {
-      if(error){
-        res.send("Erro durante a execução");
-      }else{
-        res.send(results);
-      }
-    })
-    res.send(this.dbConn);
+    this.dbConn
+      .getAllUsers()
+      .then((users) => {
+        res.send(users);
+      })
+      .catch((error) => {
+        res.send(error);
+      });
   };
 
   save = (req, res) => {
     const { name, email, password } = req.body;
 
     const user = new UserModel(name, email, password);
-    this.dbConn.push(user);
 
-    res.send(
-      `Rota POST de Usuário ativada: usuário ${body.nome} de email ${body.email} adicionado ao banco de dados`
-    );
+    this.dbConn
+      .saveUser(user)
+      .then((user) => {
+        res.send(user);
+      })
+      .catch((error) => {
+        res.send(error);
+      });
   };
 
   update = (req, res) => {
-    const name = req.params.name;
+    const id = req.params.id;
     const content = req.body;
 
-    for (let i = 0; i < this.dbConn.length; i++) {
-      if ((this.dbConn[i].name = name)) {
-        this.dbConn[i] = content;
-      }
-    }
-
-    res.send(`task: ${name} modificado com sucesso`);
+    this.dbConn
+      .updateUser(id, content)
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((error) => {
+        res.send(error);
+      });
   };
 
   remove = (req, res) => {
-    const name = req.params.name;
+    const id = req.params.id;
 
-    this.dbConn = this.dbConn.filter((u) => {
-      return u.name !== name;
-    });
-
-    res.send(`${name} apagado com sucesso`);
+    this.dbConn
+      .deleteUser(id)
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((error) => {
+        res.send(error);
+      });
   };
 }
 
-module.exports = new UserController(db);
+module.exports = new UserController(dao);
