@@ -1,3 +1,6 @@
+const requests = require("supertest")
+const express = require("express")
+
 function soma(a,b){
     return a+b
 }
@@ -13,5 +16,17 @@ test("Deve adicionar dois numero inteiros e retornar um numero inteiro", () =>{
 
 test("Deve adicionar dois numero inteiros e retornar um numero inteiro", () =>{
     expect(somaTres(1,2,3)).toBe(6)
+
+})
+
+test("Should teste route to get all users", () => {
+    requests(app)
+    .get("/users")
+    .expect("Content-type", /json/)
+    .expect(200)
+    .end((error, res) => {
+        if(error) console.log(error)
+    })
+
 
 })

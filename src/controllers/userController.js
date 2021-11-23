@@ -12,10 +12,13 @@ class UserController {
     this.dbConn
       .getUserByID(id)
       .then((user) => {
-        res.send(user);
+        res.status(200).send(user);
       })
       .catch((error) => {
-        res.send(error);
+        if(error = "error de servidor"){
+          res.status(500).send(error);
+        }
+        
       });
   };
 
@@ -38,7 +41,7 @@ class UserController {
     this.dbConn
       .saveUser(user)
       .then((user) => {
-        res.send(user);
+        res.status(201).send(user);
       })
       .catch((error) => {
         res.send(error);
@@ -52,7 +55,7 @@ class UserController {
     this.dbConn
       .updateUser(id, content)
       .then((result) => {
-        res.send(result);
+        res.status(204).send();
       })
       .catch((error) => {
         res.send(error);
