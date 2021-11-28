@@ -22,7 +22,7 @@ test("Deve adicionar dois numero inteiros e retornar um numero inteiro", () =>{
 test("Should teste route to get all users", () => {
     requests(app)
     .get("/users")
-    .expect("Content-type", /json/)
+    .expect("Content-type", /json/)     
     .expect(200)
     .end((error, res) => {
         if(error) console.log(error)
