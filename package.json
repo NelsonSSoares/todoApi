@@ -4,23 +4,21 @@
   "description": "ToDo APP do Modulo 4",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js",
-    "dev": "nodemon src/index.js",
-    "test": "jest"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "jest": "^27.3.1",
     "js-sha256": "^0.9.0",
     "sqlite3": "^5.0.2",
-    
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15",
-    "supertest": "^6.1.6"
+    "nodemon": "^2.0.15"
   }
 }

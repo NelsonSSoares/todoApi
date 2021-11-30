@@ -1,5 +1,5 @@
 const UserModel = require("../models/userModel");
-const dao = require("../dao/userDAO");
+const dao = require("../dao/memoryUserDAO");
 
 class UserController {
   constructor(dbConn) {
@@ -12,13 +12,10 @@ class UserController {
     this.dbConn
       .getUserByID(id)
       .then((user) => {
-        res.status(200).send(user);
+        res.send(user);
       })
       .catch((error) => {
-        if(error = "error de servidor"){
-          res.status(500).send(error);
-        }
-        
+        res.send(error);
       });
   };
 
@@ -41,7 +38,7 @@ class UserController {
     this.dbConn
       .saveUser(user)
       .then((user) => {
-        res.status(201).send(user);
+        res.send(user);
       })
       .catch((error) => {
         res.send(error);
@@ -55,7 +52,7 @@ class UserController {
     this.dbConn
       .updateUser(id, content)
       .then((result) => {
-        res.status(204).send();
+        res.send(result);
       })
       .catch((error) => {
         res.send(error);
